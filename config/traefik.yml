@@ -1,0 +1,22 @@
+entryPoints:
+    web:
+        # Listen on port 80 for incoming requests
+        address: :80
+        http:
+            redirections:
+              entryPoint:
+                to: websecure
+    websecure:
+        address: :443
+providers:
+    # Enable the file provider to define routers / middlewares / services in file
+    file:
+        directory: /etc/traefik/files/
+certificatesResolvers:
+  myresolver:
+    acme:
+      email: <insert email here>
+      storage: acme.json
+      httpChallenge:
+        # used during the challenge
+        entryPoint: web

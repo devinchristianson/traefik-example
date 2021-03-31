@@ -1,0 +1,15 @@
+http:
+    routers:
+        example:
+            rule: "Host(`example.local`)"
+            service: example
+            tls:
+                certResolver: myresolver
+                domains:
+                  - main: "example.local"
+    services:
+        example-server:
+            loadBalancer:
+                servers:
+                    - url: "http://internal_ip:port/"
+    middlewares:
